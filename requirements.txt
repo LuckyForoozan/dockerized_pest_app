@@ -1,5 +1,8 @@
-pandas<3
+pandas
 numpy
 matplotlib
 seaborn
+statsmodels
+pmdarima
+scipy
 scikit-learn
