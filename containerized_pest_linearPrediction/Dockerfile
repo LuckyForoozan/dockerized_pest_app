@@ -1,0 +1,8 @@
+FROM python:3.12-slim
+WORKDIR /app
+RUN apt-get update && apt-get install -y libgomp1 && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "agritech_pest_prediction(linearproblem).py"]
