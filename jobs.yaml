@@ -1,0 +1,119 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: eda-preprocessing
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+      - name: model
+        image: pest-models:v1
+        imagePullPolicy: Never
+        command: ["python", "EDA/agritech_pest_eda_and_preprocessing.py"]
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: linear-prediction
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+      - name: model
+        image: pest-models:v1
+        imagePullPolicy: Never
+        command: ["python", "containerized_pest_linearPrediction/agritech_pest_prediction(linearproblem).py"]
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pest-classification
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+      - name: model
+        image: pest-models:v1
+        imagePullPolicy: Never
+        command: ["python", "pest_classification/agritech_pest_classification.py"]
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: arima
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+      - name: model
+        image: pest-models:v1
+        imagePullPolicy: Never
+        command: ["python", "ARIMAX/agritech_pest_prediction_arima_tsa.py"]
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: arimax
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+      - name: model
+        image: pest-models:v1
+        imagePullPolicy: Never
+        command: ["python", "ARIMAX/agritech_pest_prediction_arimax_tsa.py"]
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: arimax-copy
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+      - name: model
+        image: pest-models:v1
+        imagePullPolicy: Never
+        command: ["python", "ARIMAX/agritech_pest_prediction_arimax_tsa_copy.py"]
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sarima
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+      - name: model
+        image: pest-models:v1
+        imagePullPolicy: Never
+        command: ["python", "SARIMAX/agritech_pest_prediction_sarima_tsa.py"]
+      restartPolicy: Never
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sarimax
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      containers:
+      - name: model
+        image: pest-models:v1
+        imagePullPolicy: Never
+        command: ["python", "SARIMAX/agritech_pest_prediction_sarimax_tsa.py"]
+      restartPolicy: Never

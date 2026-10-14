@@ -44,7 +44,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 # Read data
-Final_Agritech_Pest_DS = pd.read_csv('Final_Merged_Dataset_Cleaned.csv')
+Final_Agritech_Pest_DS = pd.read_csv('data/Final_Merged_Dataset_Cleaned.csv')
 
 # Showing first rows of preprocessed Agritech Pest dataset
 print(Final_Agritech_Pest_DS.head())
@@ -83,7 +83,7 @@ df["Lag_3"] = df.groupby("Location")["Number of Insects"].shift(3)
 df[["Lag_1", "Lag_2", "Lag_3"]] = df[["Lag_1", "Lag_2", "Lag_3"]].fillna(0)
 
 # Save new dataset in a csv file
-df.to_csv("FeatureExtracted_dataset.csv", index=False)
+df.to_csv("data/FeatureExtracted_dataset.csv", index=False)
 
 # Display the updated dataset with new features
 print(df)
@@ -146,7 +146,7 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 """### Linear Regression, Ridge Regression, and Lasso Regression"""
 
 # Copy dataset to nw dataframe
-FeatureExtracted_dataset = pd.read_csv('FeatureExtracted_dataset.csv')
+FeatureExtracted_dataset = pd.read_csv('data/FeatureExtracted_dataset.csv')
 df0 = FeatureExtracted_dataset.copy()
 
 # Features and Target Variable
@@ -236,7 +236,7 @@ plt.show()
 """### Decision Tree, Random Forest, Gradient Boosting, XGBoost, LightGBM, and CatBoost regressors"""
 
 # Copy dataset to nw dataframe
-FeatureExtracted_dataset = pd.read_csv('FeatureExtracted_dataset.csv')
+FeatureExtracted_dataset = pd.read_csv('data/FeatureExtracted_dataset.csv')
 df1 = FeatureExtracted_dataset.copy()
 
 # Load the dataset (assuming 'df' is already preprocessed)
@@ -325,7 +325,7 @@ from sklearn.neighbors import KNeighborsRegressor
 from sklearn.preprocessing import StandardScaler
 
 # Copy dataset to nw dataframe
-FeatureExtracted_dataset = pd.read_csv('FeatureExtracted_dataset.csv')
+FeatureExtracted_dataset = pd.read_csv('data/FeatureExtracted_dataset.csv')
 df2 = FeatureExtracted_dataset.copy()
 
 # Load the dataset (assuming 'df' is already preprocessed)
@@ -412,7 +412,7 @@ from statsmodels.tsa.stattools import adfuller
 from statsmodels.tsa.seasonal import STL
 
 # Load dataset
-FeatureExtracted_dataset = pd.read_csv('FeatureExtracted_dataset.csv')
+FeatureExtracted_dataset = pd.read_csv('data/FeatureExtracted_dataset.csv')
 TS_df = FeatureExtracted_dataset.copy()
 
 # Convert Date column to datetime
@@ -495,7 +495,7 @@ plt.show()
 """
 
 # Load dataset
-Time_df = pd.read_csv('FeatureExtracted_dataset.csv')
+Time_df = pd.read_csv('data/FeatureExtracted_dataset.csv')
 
 # Convert Date column to datetime
 Time_df["Date"] = pd.to_datetime(Time_df["Date"])  # Convert Date to datetime
@@ -591,6 +591,13 @@ for group, results in all_results.items():
             mlflow.log_metric("MAE", mae)
             mlflow.log_metric("MSE", mse)
             mlflow.log_metric("R2", r2)
+
+
+import os
+os.makedirs("mlruns", exist_ok=True)
+
+
+
 
 # ---- Save best model ----
 import joblib
